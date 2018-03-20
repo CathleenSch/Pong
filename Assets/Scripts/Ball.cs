@@ -51,7 +51,7 @@ public class Ball : MonoBehaviour {
         if (col.gameObject.name == "WallVertical_right") {
             transform.position = new Vector3(3, -13, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            scoreRight++;
+            scoreLeft++;
             setScoreText();
         }
 
@@ -59,7 +59,7 @@ public class Ball : MonoBehaviour {
         if (col.gameObject.name == "WallVertical_left") {
             transform.position = new Vector3(3, -13, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            scoreLeft++;
+            scoreRight++;
             setScoreText();
         }
     }
@@ -70,5 +70,24 @@ public class Ball : MonoBehaviour {
 
     void setScoreText() {
         scoreText.text = "Score: \t\t " + scoreLeft.ToString() + ":" + scoreRight.ToString();
+
+		if (scoreLeft == 10) {
+			DataPasser.winner = 1;
+			Application.LoadLevel ("scene_finish");
+		} else if (scoreRight == 10) {
+			DataPasser.winner = 2;
+			Application.LoadLevel ("scene_finish");
+		} else {
+			// Debug.Log("right before starting coroutine");
+			// StartCoroutine(Wait());
+			// Debug.Log("right after starting coroutine");
+			Start ();
+		}
     }
+
+	IEnumerator Wait() {
+		// print(Time.time);
+		yield return new WaitForSeconds(50);
+		// print(Time.time);
+	}
 }
