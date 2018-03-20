@@ -1,15 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour {
     public float speed = 30;
+    public Text scoreText;
+    int scoreLeft = 0;
+    int scoreRight = 0;
 
 	// Use this for initialization
 	void Start () {
         // Initial Velocity
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
-	}
+        setScoreText();
+    }
+
+    private void Update() {
+        
+    }
+
 
     private void OnCollisionEnter2D(Collision2D col) {
         // Hit left racket?
@@ -36,9 +46,29 @@ public class Ball : MonoBehaviour {
             // Set velocity with dir speed
             GetComponent<Rigidbody2D>().velocity = dir * speed;
         }
+
+        // Hits the right wall -> point for left player
+        if (col.gameObject.name == "WallVertical_right") {
+            transform.position = new Vector3(3, -13, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            scoreRight++;
+            setScoreText();
+        }
+
+        // Hits the left wall -> point for right player
+        if (col.gameObject.name == "WallVertical_left") {
+            transform.position = new Vector3(3, -13, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            scoreLeft++;
+            setScoreText();
+        }
     }
 
     float hitFactor (Vector2 ballPos, Vector2 racketPos, float racketHeight) {
         return (ballPos.y - racketPos.y) / racketHeight;
+    }
+
+    void setScoreText() {
+        scoreText.text = "Score: \t\t " + scoreLeft.ToString() + ":" + scoreRight.ToString();
     }
 }
