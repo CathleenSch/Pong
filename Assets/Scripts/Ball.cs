@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
     public float speed = 30;
@@ -53,6 +54,8 @@ public class Ball : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             scoreLeft++;
             setScoreText();
+            StartCoroutine(Wait());
+            setVelocity(1);
         }
 
         // Hits the left wall -> point for right player
@@ -61,6 +64,8 @@ public class Ball : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             scoreRight++;
             setScoreText();
+            StartCoroutine(Wait());
+            setVelocity(-1);
         }
     }
 
@@ -73,21 +78,22 @@ public class Ball : MonoBehaviour {
 
 		if (scoreLeft == 10) {
 			DataPasser.winner = 1;
-			Application.LoadLevel ("scene_finish");
-		} else if (scoreRight == 10) {
+			SceneManager.LoadScene("scene_finish");
+		} 
+        
+        if (scoreRight == 10) {
 			DataPasser.winner = 2;
-			Application.LoadLevel ("scene_finish");
-		} else {
-			// Debug.Log("right before starting coroutine");
-			// StartCoroutine(Wait());
-			// Debug.Log("right after starting coroutine");
-			Start ();
-		}
+            SceneManager.LoadScene("scene_finish");
+        }
     }
 
 	IEnumerator Wait() {
 		// print(Time.time);
-		yield return new WaitForSeconds(50);
+		yield return new WaitForSeconds(50000000);
 		// print(Time.time);
 	}
+
+    void setVelocity(int direction) {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(direction, 0) * speed;
+    }
 }
