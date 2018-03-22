@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
-    public float speed = 30;
+    public int speed;
     public Text scoreText;
     int scoreLeft = 0;
     int scoreRight = 0;
@@ -13,12 +13,13 @@ public class Ball : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // Initial Velocity
+        speed = DataPasser.initialSpeed;
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
         setScoreText();
     }
 
     private void Update() {
-        
+        speed = DataPasser.initialSpeed;
     }
 
 
@@ -76,12 +77,12 @@ public class Ball : MonoBehaviour {
     void setScoreText() {
         scoreText.text = "Score: \t\t " + scoreLeft.ToString() + ":" + scoreRight.ToString();
 
-		if (scoreLeft == 10) {
+		if (scoreLeft == DataPasser.maxScore) {
 			DataPasser.winner = 1;
 			SceneManager.LoadScene("scene_finish");
 		} 
         
-        if (scoreRight == 10) {
+        if (scoreRight == DataPasser.maxScore) {
 			DataPasser.winner = 2;
             SceneManager.LoadScene("scene_finish");
         }
