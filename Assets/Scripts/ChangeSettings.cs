@@ -10,6 +10,8 @@ public class ChangeSettings : MonoBehaviour {
     public Text settingInitialSpeed;
     public Text currentInitialSpeed;
 
+    public Toggle increaseSpeedToggle;
+
     public int y = 0;
     public int x = 0;
 
@@ -23,5 +25,13 @@ public class ChangeSettings : MonoBehaviour {
         y = int.Parse(settingInitialSpeed.text);
         DataPasser.initialSpeed = y;
         currentInitialSpeed.text = y.ToString();
+    }
+
+    public void changeIncreaseSpeed() {
+        if (increaseSpeedToggle.isOn) {
+            DataPasser.increaseSpeed = true;
+        } else {
+            DataPasser.increaseSpeed = false;
+        }
     }
 }

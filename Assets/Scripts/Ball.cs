@@ -5,13 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
-    public int speed;
+    public float speed;
     public Text scoreText;
     int scoreLeft = 0;
     int scoreRight = 0;
+    int maxScore;
 
 	// Use this for initialization
 	void Start () {
+        maxScore = DataPasser.maxScore;
+
         // Initial Velocity
         speed = DataPasser.initialSpeed;
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
@@ -19,7 +22,21 @@ public class Ball : MonoBehaviour {
     }
 
     private void Update() {
-        speed = DataPasser.initialSpeed;
+        maxScore = DataPasser.maxScore;
+
+        if (DataPasser.increaseSpeed) {
+            if ((scoreLeft >= maxScore / 4 && scoreLeft < maxScore / 2) || (scoreRight >= maxScore / 4 && scoreRight < maxScore / 2)) {
+                speed = DataPasser.initialSpeed * 1.5f;
+            } else if ((scoreLeft >= maxScore / 2 && scoreLeft < (maxScore / 4) * 3) || (scoreRight >= maxScore / 2 && scoreRight < (maxScore / 4) * 3)) {
+                speed = DataPasser.initialSpeed * 2.0f;
+            } else if ((scoreLeft >= (maxScore / 4) * 3 && scoreLeft < maxScore) || (scoreRight >= (maxScore / 4) * 3 && scoreRight < maxScore)) {
+                speed = DataPasser.initialSpeed * 2.5f;
+            } else {
+                speed = DataPasser.initialSpeed;
+            }
+        } else {
+            speed = DataPasser.initialSpeed;
+        }
     }
 
 
