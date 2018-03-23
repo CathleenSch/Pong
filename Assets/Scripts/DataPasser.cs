@@ -3,5 +3,6 @@
     public static int maxScore = 10;
     public static int initialSpeed = 30;
     public static bool increaseSpeed = true;
-    public static bool multiplayer = true;
+    public static bool multiplayer = false;
+    public static int difficulty = 1;
 }

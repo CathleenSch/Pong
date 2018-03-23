@@ -7,6 +7,14 @@ public class ShowWinner : MonoBehaviour {
 	public Text winnerText;
 	// Use this for initialization
 	void Start () {
-		winnerText.text = ("Player " + DataPasser.winner + " won!");
+        if (DataPasser.multiplayer) {
+		    winnerText.text = ("Player  " + DataPasser.winner + "  wins!");
+        } else {
+            if (DataPasser.winner == 1) {
+                winnerText.text = ("You  lose!");
+            } else {
+                winnerText.text = ("You  win!");
+            }
+        }
 	}
 }

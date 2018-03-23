@@ -10,6 +10,9 @@ public class Ball : MonoBehaviour {
     int scoreLeft = 0;
     int scoreRight = 0;
     int maxScore;
+    public Rigidbody2D invBall;
+    public static bool invBallMoving = false;
+    public Rigidbody2D leftRacket;
 
 	// Use this for initialization
 	void Start () {
@@ -64,6 +67,12 @@ public class Ball : MonoBehaviour {
 
             // Set velocity with dir speed
             GetComponent<Rigidbody2D>().velocity = dir * speed;
+
+            if (!DataPasser.multiplayer) {
+                invBall.transform.position = GetComponent<Rigidbody2D>().transform.position;
+                invBall.velocity = dir * speed * 1.7f;
+                invBallMoving = true;
+            }
         }
 
         // Hits the right wall -> point for left player
@@ -84,6 +93,8 @@ public class Ball : MonoBehaviour {
             setScoreText();
             StartCoroutine(Wait());
             setVelocity(-1);
+
+            leftRacket.transform.position = new Vector3(-16, -13.5f, 0);
         }
     }
 
