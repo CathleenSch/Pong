@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveRacket : MonoBehaviour {
+public class MoveRightRacket : MonoBehaviour {
     public float speed = 30;
     public string axis = "Vertical";
+    public Rigidbody2D rightRacket;
 
     private void FixedUpdate() {
         float v = Input.GetAxisRaw(axis);
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, v) * speed;
+        rightRacket.velocity = new Vector2(0, v) * speed;
 
     }
 }

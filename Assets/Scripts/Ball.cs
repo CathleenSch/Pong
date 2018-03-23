@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour {
     int maxScore;
     public Rigidbody2D invBall;
     public static bool invBallMoving = false;
+    public Rigidbody2D leftRacket;
 
 	// Use this for initialization
 	void Start () {
@@ -69,7 +70,7 @@ public class Ball : MonoBehaviour {
 
             if (!DataPasser.multiplayer) {
                 invBall.transform.position = GetComponent<Rigidbody2D>().transform.position;
-                invBall.velocity = dir * speed * 2;
+                invBall.velocity = dir * speed * 1.7f;
                 invBallMoving = true;
             }
         }
@@ -92,6 +93,8 @@ public class Ball : MonoBehaviour {
             setScoreText();
             StartCoroutine(Wait());
             setVelocity(-1);
+
+            leftRacket.transform.position = new Vector3(-16, -13.5f, 0);
         }
     }
 

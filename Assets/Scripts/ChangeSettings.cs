@@ -12,6 +12,11 @@ public class ChangeSettings : MonoBehaviour {
 
     public Toggle increaseSpeedToggle;
 
+    public Toggle multiplayerToggle;
+
+    public Slider difficultySlider;
+    public Text currentDifficulty;
+
     public int y = 0;
     public int x = 0;
 
@@ -28,10 +33,23 @@ public class ChangeSettings : MonoBehaviour {
     }
 
     public void changeIncreaseSpeed() {
-        if (increaseSpeedToggle.isOn) {
-            DataPasser.increaseSpeed = true;
-        } else {
-            DataPasser.increaseSpeed = false;
+        DataPasser.increaseSpeed = increaseSpeedToggle.isOn;
+    }
+
+    public void changeMultiplayer() {
+        DataPasser.multiplayer = multiplayerToggle.isOn;
+    }
+
+    public void changeDifficulty() {
+        DataPasser.difficulty = (int) difficultySlider.value;
+        if (DataPasser.difficulty == 0) {
+            currentDifficulty.text = "easy";
+        }
+        else if (DataPasser.difficulty == 1) {
+            currentDifficulty.text = "medium";
+        }
+        else {
+            currentDifficulty.text = "hard";
         }
     }
 }
