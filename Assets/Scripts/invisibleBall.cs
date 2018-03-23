@@ -7,15 +7,15 @@ public class invisibleBall : MonoBehaviour {
     public int xToStop = DataPasser.difficulty;
 
 	void FixedUpdate () {
-        if (DataPasser.difficulty == 0) {
-            xToStop = -2;
-        }
-        else if (DataPasser.difficulty == 1) {
-            xToStop = -7;
-        }
-        else {
-            xToStop = -12;
-        }
+		if (DataPasser.difficulty == 0) {
+			xToStop = -2;
+		} else if (DataPasser.difficulty == 1) {
+			xToStop = -5;
+		} else if (DataPasser.difficulty == 2) {
+			xToStop = -8;
+		} else {
+			xToStop = -11;
+		}
 
         if (!DataPasser.multiplayer && Ball.invBallMoving && invBall.transform.position.x <= xToStop) {
             invBall.velocity = new Vector2(0, 0);

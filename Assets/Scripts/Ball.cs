@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour {
     public Rigidbody2D invBall;
     public static bool invBallMoving = false;
     public Rigidbody2D leftRacket;
+	public Rigidbody2D rightRacket;
 
 	// Use this for initialization
 	void Start () {
@@ -29,11 +30,11 @@ public class Ball : MonoBehaviour {
 
         if (DataPasser.increaseSpeed) {
             if ((scoreLeft >= maxScore / 4 && scoreLeft < maxScore / 2) || (scoreRight >= maxScore / 4 && scoreRight < maxScore / 2)) {
-                speed = DataPasser.initialSpeed * 1.5f;
+                speed = DataPasser.initialSpeed * 1.3f;
             } else if ((scoreLeft >= maxScore / 2 && scoreLeft < (maxScore / 4) * 3) || (scoreRight >= maxScore / 2 && scoreRight < (maxScore / 4) * 3)) {
-                speed = DataPasser.initialSpeed * 2.0f;
+                speed = DataPasser.initialSpeed * 1.7f;
             } else if ((scoreLeft >= (maxScore / 4) * 3 && scoreLeft < maxScore) || (scoreRight >= (maxScore / 4) * 3 && scoreRight < maxScore)) {
-                speed = DataPasser.initialSpeed * 2.5f;
+                speed = DataPasser.initialSpeed * 2.1f;
             } else {
                 speed = DataPasser.initialSpeed;
             }
@@ -78,23 +79,13 @@ public class Ball : MonoBehaviour {
         // Hits the right wall -> point for left player
         if (col.gameObject.name == "WallVertical_right") {
             transform.position = new Vector3(3, -13, 0);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            scoreLeft++;
-            setScoreText();
-            StartCoroutine(Wait());
-            setVelocity(1);
+            StartCoroutine(HitRight());
         }
 
         // Hits the left wall -> point for right player
         if (col.gameObject.name == "WallVertical_left") {
             transform.position = new Vector3(3, -13, 0);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            scoreRight++;
-            setScoreText();
-            StartCoroutine(Wait());
-            setVelocity(-1);
-
-            leftRacket.transform.position = new Vector3(-16, -13.5f, 0);
+			StartCoroutine(HitLeft());
         }
     }
 
@@ -116,13 +107,32 @@ public class Ball : MonoBehaviour {
         }
     }
 
-	IEnumerator Wait() {
-		// print(Time.time);
-		yield return new WaitForSeconds(50000000);
-		// print(Time.time);
+	IEnumerator HitRight() {
+		GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+		scoreLeft++;
+		setScoreText();
+		yield return new WaitForSeconds(1);
+		setVelocity(1);
+
+		leftRacket.transform.position = new Vector3(-16, setRandomNumber(), 0);
+	}
+
+	IEnumerator HitLeft() {
+		GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+		scoreRight++;
+		setScoreText();
+		yield return new WaitForSeconds(1);
+		setVelocity(-1);
+
+		leftRacket.transform.position = new Vector3(-16, setRandomNumber(), 0);
 	}
 
     void setVelocity(int direction) {
         GetComponent<Rigidbody2D>().velocity = new Vector2(direction, 0) * speed;
     }
+
+	float setRandomNumber() {
+		// -15, -11.5
+		return Random.Range(-15f, -11.5f);
+	}
 }

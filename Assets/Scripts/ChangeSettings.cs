@@ -42,14 +42,14 @@ public class ChangeSettings : MonoBehaviour {
 
     public void changeDifficulty() {
         DataPasser.difficulty = (int) difficultySlider.value;
-        if (DataPasser.difficulty == 0) {
-            currentDifficulty.text = "easy";
-        }
-        else if (DataPasser.difficulty == 1) {
-            currentDifficulty.text = "medium";
-        }
-        else {
-            currentDifficulty.text = "hard";
-        }
+		if (DataPasser.difficulty == 0) {
+			currentDifficulty.text = "easy";
+		} else if (DataPasser.difficulty == 1) {
+			currentDifficulty.text = "medium";
+		} else if (DataPasser.difficulty == 2) {
+			currentDifficulty.text = "hard";
+		} else {
+			currentDifficulty.text = "hell";
+		}
     }
 }

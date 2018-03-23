@@ -17,13 +17,15 @@ public class MoveLeftRacket : MonoBehaviour {
         MoveRightRacket moveRight = rightRacketObject.GetComponent<MoveRightRacket>();
         Rigidbody2D right = moveRight.rightRacket;
 
-        if (DataPasser.difficulty == 0) {
-            xToStop = -2;
-        } else if (DataPasser.difficulty == 1) {
-            xToStop = -7;
-        } else {
-            xToStop = -12;
-        }
+		if (DataPasser.difficulty == 0) {
+			xToStop = -2;
+		} else if (DataPasser.difficulty == 1) {
+			xToStop = -5;
+		} else if (DataPasser.difficulty == 2) {
+			xToStop = -8;
+		} else {
+			xToStop = -11;
+		}
 
 
         if (DataPasser.multiplayer) {
