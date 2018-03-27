@@ -220,18 +220,18 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5261556}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &35649992
 GameObject:
@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 262087884}
   - component: {fileID: 262087883}
   - component: {fileID: 262087885}
+  - component: {fileID: 262087886}
   m_Layer: 0
   m_Name: WallVertical_right
   m_TagString: Untagged
@@ -600,6 +601,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 32}
   m_EdgeRadius: 0
+--- !u!50 &262087886
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 262087882}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &618699502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,8 +1187,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1260484595}
   - component: {fileID: 1260484594}
-  - component: {fileID: 1260484596}
   - component: {fileID: 1260484597}
+  - component: {fileID: 1260484596}
   m_Layer: 0
   m_Name: WallHorizontal_upper
   m_TagString: Untagged
@@ -1256,7 +1277,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 50, y: 1}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 1
 --- !u!50 &1260484597
 Rigidbody2D:
   serializedVersion: 4
@@ -1264,14 +1285,14 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1260484593}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1422,6 +1443,7 @@ GameObject:
   - component: {fileID: 1415270043}
   - component: {fileID: 1415270042}
   - component: {fileID: 1415270044}
+  - component: {fileID: 1415270045}
   m_Layer: 0
   m_Name: WallVertical_left
   m_TagString: Untagged
@@ -1511,6 +1533,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 32}
   m_EdgeRadius: 0
+--- !u!50 &1415270045
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1415270041}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &1471712155
 GameObject:
   m_ObjectHideFlags: 0
