@@ -18,7 +18,6 @@ public class pauseMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown("Cancel")) {
-			Debug.Log ("Escape pressed.");
 			paused = togglePause();
             menu.enabled = true;
             text1.enabled = true;
@@ -49,7 +48,6 @@ public class pauseMenu : MonoBehaviour {
 	}
 
 	public static bool togglePause() {
-		Debug.Log ("Time scale:  " + Time.timeScale);
 		if (Time.timeScale == 0f) {
 			Time.timeScale = 1f;
 			return false;

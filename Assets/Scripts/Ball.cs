@@ -20,6 +20,10 @@ public class Ball : MonoBehaviour {
 	void Start () {
         Debug.Log("Calling Start");
         maxScore = DataPasser.maxScore;
+        pauseMenu.paused = false;
+
+        Time.timeScale = 1f;
+
 
         // Initial Velocity
         speed = DataPasser.initialSpeed;
@@ -33,8 +37,6 @@ public class Ball : MonoBehaviour {
         if (counter <= 100) {
             counter++;
         } else {
-            Debug.Log("position: " + GetComponent<Rigidbody2D>().transform.position.y);
-            Debug.Log("speed: " + speed);
             counter = 0;
         }
 
@@ -80,7 +82,20 @@ public class Ball : MonoBehaviour {
         {
             // Calculate hit factor
             float y = hitFactor(transform.position, col.transform.position, col.collider.bounds.size.y);
+            /* if (y < 0) {
+                if (Time.timeScale == 0f)
+                {
+                    Time.timeScale = 1f;
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                }
+            }*/
+
             Debug.Log("hitFactor: " + y);
+            Debug.Log("position: " + GetComponent<Rigidbody2D>().transform.position.y);
+
             // Calculate direction, make length = 1 via normalizing
             Vector2 dir = new Vector2(-1, y).normalized;
 
