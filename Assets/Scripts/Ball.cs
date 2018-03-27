@@ -14,9 +14,11 @@ public class Ball : MonoBehaviour {
     public static bool invBallMoving = false;
     public Rigidbody2D leftRacket;
 	public Rigidbody2D rightRacket;
+    int counter = 0;
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("Calling Start");
         maxScore = DataPasser.maxScore;
 
         // Initial Velocity
@@ -28,12 +30,28 @@ public class Ball : MonoBehaviour {
     private void Update() {
         maxScore = DataPasser.maxScore;
 
+        if (counter <= 100) {
+            counter++;
+        } else {
+            Debug.Log("position: " + GetComponent<Rigidbody2D>().transform.position.y);
+            Debug.Log("speed: " + speed);
+            counter = 0;
+        }
+
         if (DataPasser.increaseSpeed) {
-            if ((scoreLeft >= maxScore / 4 && scoreLeft < maxScore / 2) || (scoreRight >= maxScore / 4 && scoreRight < maxScore / 2)) {
+            int bigger;
+
+            if (scoreLeft > scoreRight) {
+                bigger = scoreLeft;
+            } else {
+                bigger = scoreRight;
+            }
+
+            if (bigger >= (maxScore / 4) && bigger < (maxScore / 2)) {
                 speed = DataPasser.initialSpeed * 1.3f;
-            } else if ((scoreLeft >= maxScore / 2 && scoreLeft < (maxScore / 4) * 3) || (scoreRight >= maxScore / 2 && scoreRight < (maxScore / 4) * 3)) {
+            } else if (bigger >= maxScore / 2 && bigger < (maxScore / 4) * 3) {
                 speed = DataPasser.initialSpeed * 1.7f;
-            } else if ((scoreLeft >= (maxScore / 4) * 3 && scoreLeft < maxScore) || (scoreRight >= (maxScore / 4) * 3 && scoreRight < maxScore)) {
+            } else if (bigger >= (maxScore / 4) * 3 && bigger < maxScore) {
                 speed = DataPasser.initialSpeed * 2.1f;
             } else {
                 speed = DataPasser.initialSpeed;
@@ -62,7 +80,7 @@ public class Ball : MonoBehaviour {
         {
             // Calculate hit factor
             float y = hitFactor(transform.position, col.transform.position, col.collider.bounds.size.y);
-
+            Debug.Log("hitFactor: " + y);
             // Calculate direction, make length = 1 via normalizing
             Vector2 dir = new Vector2(-1, y).normalized;
 

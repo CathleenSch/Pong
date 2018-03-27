@@ -10,7 +10,6 @@ public class pauseMenu : MonoBehaviour {
 	public static bool paused = false;
 
 	void Start () {
-		Debug.Log ("menu should be disabled");
 		menu.enabled = false;
 		text1.enabled = false;
 		text2.enabled = false;
