@@ -7,7 +7,7 @@ public class pauseMenu : MonoBehaviour {
 	public Canvas menu;
 	public Text text1;
 	public Text text2;
-	public bool paused = false;
+	public static bool paused = false;
 
 	void Start () {
 		Debug.Log ("menu should be disabled");
@@ -21,7 +21,10 @@ public class pauseMenu : MonoBehaviour {
 		if (Input.GetButtonDown("Cancel")) {
 			Debug.Log ("Escape pressed.");
 			paused = togglePause();
-		}
+            menu.enabled = true;
+            text1.enabled = true;
+            text2.enabled = true;
+        }
 
 		if (!paused) {
 			menu.enabled = false;
@@ -46,7 +49,7 @@ public class pauseMenu : MonoBehaviour {
 		}
 	}
 
-	bool togglePause() {
+	public static bool togglePause() {
 		Debug.Log ("Time scale:  " + Time.timeScale);
 		if (Time.timeScale == 0f) {
 			Time.timeScale = 1f;
